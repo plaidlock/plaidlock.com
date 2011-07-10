@@ -1,0 +1,35 @@
+<% title 'Meet the Team' %>
+<% description 'PlaidLock, LLC is a web design and development company composed of two developers and a designer. Read our bios and other information...' %>
+<% keywords 'designers, developers, profile, bio' %>
+  
+<% 
+	people = [
+		{:first_name => 'Seth', :last_name => 'Vargo', :position => 'developer', :site => 'www.sethvargo.com', :bio => "Seth began web and application development at a very early age, while still in Middle School. He's developed applications in ColdFusion, PHP, Sinatra, Rails, and Node.js. Recently Seth has become a proponent of open-source software, writing Ruby gems like <a href=\"https://github.com/sethvargo/powify\">powify</a> and <a href=\"https://github.com/sethvargo/isbndb\">isbndb</a>. Seth is currently a student at Carnegie Mellon University studying Information Systems. He is a teaching assistant for 3 classes."},
+		{:first_name => 'Nolan', :last_name => 'Carroll', :position => 'developer', :site => 'www.nolandc.com', :bio => "Nolan's passion for programming began with the development of simple video games. It soon grew to an interest in applications and web development, eventually landing him an internship at Fiserv. Following Fiserv he interned at Vivisimo, working primarily in Ruby on Rails. He is currently a student at Carnegie Mellon University studying Information Systems. Nolan enjoys playing basketball, reading non-fiction, and listening to indie music."},
+		{:first_name => 'Patrick', :last_name => 'Hogan', :position => 'designer', :site => 'www.wheninbrome.com', :bio => "Patrick's interest in design stemmed from his stint in art classes in high school. While painting satisfied a creative hunger that other classes couldn't, it just wasn't <i>precise</i> enough. Luckily, he stumbled upon design: expressive, yet detailed. He is currently a student at Carnegie Mellon University studying Mechanical Engineering and Industrial Design. When not wrapped up in those studies he is often listening to music, working on his bike, or cooking." }
+		]
+
+%>
+
+<% people.sort_by{ rand }.each do |p| %>
+	<div id="<%= p[:first_name].downcase %>" class="person">
+		<div class="position <%= p[:position] %>">
+			<span class="text-replace"><%= p[:position].capitalize %></span>
+		</div>
+		<div class="picture">
+			<%= image_tag 'bios/' + p[:first_name].downcase + '.jpg', :alt => (p[:first_name] + ' ' + p[:last_name]) %>
+		</div>
+		<div class="arrow"></div>
+		<div class="info">
+			<div class="name">
+				<span class="given"><%= p[:first_name] %></span><span class="sur"><%= p[:last_name] %></span>
+			</div>
+			<a href="http://<%= p[:site] %>" class="site" target="_TOP"><%= p[:site] %></a>
+			<div class="specs clear">
+				<%= p[:bio].html_safe %>
+			</div>
+		</div>
+	</div>
+<% end %>
+
+<div class="clear"></div>

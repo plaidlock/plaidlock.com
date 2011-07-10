@@ -1,0 +1,24 @@
+<% title 'Contact Us' %>
+<% description 'Get in touch with PlaidLock! Get a price quote or free consultation...' %>
+<% keywords 'contact, contact us, quote, pricing, consultation' %>
+
+<div class="form">
+
+	<h1>Contact Us</h1>
+	
+	<p>Please fill out this form, or feel free to send us an email at <a href="mailto@plaidlock.com">info@plaidlock.com</a> and we will respond promptly.</p>
+	
+	
+	<% form_tag page_path(:contact) do%>
+		<p>
+			Your Email<br/>
+			<%= text_field_tag :from, nil, :class => 'text focus autoclear' %>
+		</p>
+		<p>
+			Message<br/>
+			<%= text_area_tag :message, nil, :class => 'text autoclear', :size =>'80x18' %>
+		</p>
+		<%= submit_tag 'Submit', :class => 'button' %>	
+	<% end %>
+	
+</div>

@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta name="description" content="<%= content_for(:description) %>"> 
+    <meta name="keywords" content="<%= content_for(:keywords) %>">
+    <!-- CSS Stylesheets -->
+    <%= stylesheet_link_tag %w(reset.css fancybox.css stylesheet.css) %>
+    <!-- Javascript -->
+    <%= javascript_include_tag %w(jquery.js jquery_ujs.js fancybox.js application.js) %>
+    <script type="text/javascript" charset="utf-8">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-24186169-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    <title><%= content_for(:title) %></title>
+  </head>
+
+  <body>
+  	<div id="page-wrapper">
+  	  <div id="page-inner">
+  	    <div id="header-wrapper">
+  	      <div id="header-inner">
+
+  	      	<a href="./home">
+  	      		<div id="logo" class="">
+  	      			<span class="text-replace">PlaidLock</span>
+  	      		</div>
+  		      </a>
+
+  					<div id="nav-wrapper">
+  						<div id="nav-inner">
+							
+  							<% links = [
+  								{:title => 'home', :text => 'Back to the beginning', :class => "" },
+  								{:title => 'about', :text => 'Learn about Plaidlock', :class => "" },
+  								{:title => 'work', :text => 'See our portfolio', :class => ""},
+  								{:title => 'contact', :text => 'Get in touch with us', :class => 'fancybox' }
+  							] %>
+								
+
+							<% links.each do |link| %>
+								<% div_class = link[:title] + (params[:action] == link[:title] ? ' active' : '') %>
+								<% link_class = link[:class] + (params[:action] == link[:title] ? 'active' : '') %>
+								<a href="./<%= link[:title] %>" class="<%= link_class %>" alt="<%= link[:text] %>">
+									<div class="nav-element <%= div_class %>">
+										<span><%= link[:title].capitalize %></span>
+									</div>
+								</a>
+							<% end %>
+
+  						</div>
+  					</div>
+					
+  				</div>
+  			</div>
+	
+  	    <div id="content-wrapper">
+  	      <div class="content-inner">
+  	        <%= render :partial => 'layouts/flash', :locals => {:flash_data => flash} %>
+  					<%= yield %>
+  					<%= render :partial => 'layouts/footer' %>
+  				</div>
+  			</div>
+
+  		</div>
+  	</div>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+<% title 'Welcome to PlaidLock!' %>
+<% description 'Welcome to PlaidLock, LLC! We are a web design and development firm specializing in Rails development. With over 10 years of combined experience, we would love the opportunity to build your next web application...' %>
+<% keywords 'home, welcome, rails, development, web development' %>
+    
+<div>
+
+  <div id="mission">
+    <h2 id="ourmission"><span class="text-replace">Our Mission</span></h2>
+    <p>To design clean web applications with <br />straightforward user interfaces</p>
+  </div>
+  
+  <div class="feature-work">
+	<div class="feature-present">
+		<div class="feature-image">
+			<a href="/work#CarrollBros"><%= image_tag 'portfolio/carrollbros/thumb-color.jpg' %></a>
+		</div>
+	</div>
+  </div>
+
+  <div class="column-half">
+    <h2 id="whatwedo"><span class="text-replace">What We Do</span></h2>
+    <ul>
+      <li>Ruby on Rails</li>
+      <li>PHP</li>
+      <li>Javascript</li>
+      <li>HTML/CSS</li>
+    </ul>
+    <p class="sub-text">Not what you had in mind? There's a chance we might do it anyway. <%= link_to 'contact us', page_path(:contact), :class => 'fancybox' %> and we'll try to work something out.</p>
+  </div>
+  
+  <div class="column-half">
+    <h2 id="twitterbuzz"><span class="text-replace">Twitter Buzz</span></h2>
+    <ul id="twitter_content">
+      <li>Loading...</li>
+    </ul>	
+  </div>
+  
+  <!-- to clear floated columns -->
+  <div class="clear"></div>
+  
+</div>
+  
+<%= javascript_include_tag 'twitter.js?plaidlock' %>
