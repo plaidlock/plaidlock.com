@@ -2,47 +2,38 @@
 <% description 'Check out the portfolio of our work. Get an idea of the kind of Rails development we could do for your organization or business!' %>
 <% keywords 'portfolio, website, work, our work' %>
 
-<% 
+<%
     clients = [
-        {:name => 'Carroll Bros', :num_images => 2, :info => "The Carroll Brothers were looking to revamp the website for their annual basketball camp. We stepped up to offer them a refreshing design that can be expanded as their camp grows. ", :link_allow => false, :link => "http://carrollbros.com" }
+        OpenStruct.new({:name => 'Carroll Bros', :num_images => 2, :info => 'The Carroll Brothers were looking to revamp the website for their annual basketball camp. We stepped up to offer them a refreshing design that can be expanded as their camp grows.', :allow_link => true, :link => 'http://www.carrollbros.com'}),
+        OpenStruct.new({:name => 'Decision Makers', :num_images => 3, :info => 'The Decision Makers wanted to auto-generate reports and charts for their participants. Originally using Microsoft Excel macros, they quickly fell in love with our auto-generated reports using High Charts.', :allow_link => false})
         ]
 %>
 
-<% 
-  clients.each do |c| 
-  c[:info] += "<br /><br /><i>Click the image to see more.</i>"
-  %>
-  <div class="single-work" id="<%= c[:name].gsub(/ /,'') %>">
+<% clients.each do |c| %>
+  <div class="single-work" id="<%= c.name.parameterize %>">
 
     <div class="single-present">
       <div class="single-image">
 
-        <a class="portfolio_image" href="./images/portfolio/<%= c[:name].gsub(/ /,'').downcase %>/1.jpg" rel="<%= c[:name].gsub(/ /,'') %>"><img src="./images/portfolio/<%= c[:name].gsub(/ /,'').downcase %>/thumb-bw.jpg" alt="" /></a>
-        
-        <% 
-          i = 2
-          n = c[:num_images]-1
-          (1..n).each do |image|
-        %>
-          <a class="portfolio_image" href="./images/portfolio/<%= c[:name].gsub(/ /,'').downcase %>/<%= i %>.jpg" rel="<%= c[:name].gsub(/ /,'') %>"></a>
-         <% i+= 1 %> 
-        
-        <% end %>
+        <a class="portfolio_image" href="./images/portfolio/<%= c.name.parameterize %>/1.jpg" rel="<%= c.name.parameterize %>"><img src="./images/portfolio/<%= c.name.parameterize %>/thumb-bw.jpg" alt="<%= c.name %>" /></a>
+
+        <% (2..c.num_images).each do |i| %>
+          <a class="portfolio_image" href="./images/portfolio/<%= c.name.parameterize %>/<%= i %>.jpg" rel="<%= c.name.parameterize %>"></a>
+        <% end unless c.num_images.nil? %>
       </div>
     </div>
 
     <div class="single-info">
-      <% if c[:link_allow] %>
-        <a href="<%= c[:link] %>" class="title" target="new">
-      <% end %>
-      <h3><%= c[:name] %></h3>
-      <% if c[:link_allow] %>
+      <% if c.allow_link %>
+        <a href="<%= c.link %>" class="title" target="_TOP">
+          <h3><%= c.name %></h3>
         </a>
+      <% else %>
+        <h3><%= c.name %></h3>
       <% end %>
-      <p><%= c[:info].html_safe %></p>
+      <p><%= "#{c.info}<br /><br /><i>Click the image to see more.</i>".html_safe %></p>
     </div>
-    
+
     <div class="clear"></div>
-    
   </div>
 <% end %>
